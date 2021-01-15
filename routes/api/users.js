@@ -18,7 +18,7 @@ router.get('/test', (req, res, next) => {
     res.status(200).json({ message: 'user route works' });
 });
 
-// @route api/users/register
+// @route POST api/users/register
 // @desc register user route
 // @access public
 router.post('/register', (req, res, next) => {
@@ -53,7 +53,7 @@ router.post('/register', (req, res, next) => {
     });
 });
 
-// @route api/users/login
+// @route POST api/users/login
 // @desc login  user route
 // @access public
 router.post('/login', (req, res, next) => {
@@ -98,7 +98,7 @@ router.post('/login', (req, res, next) => {
     });
 });
 
-// @route api/users/current
+// @route GET api/users/current
 // @desc current  user route
 // @access private
 router.get(
@@ -112,4 +112,29 @@ router.get(
         });
     }
 );
+
+// @route GET api/users/all
+// @desc get all  users
+// @access public
+router.get('/all', (req, res, next) => {
+    User.find()
+        .then((profiles) => {
+            if (!profiles) {
+                return res.status(404).json({ user: 'There is no user until' });
+            }
+            res.status(200).json(profiles);
+        })
+        .then((err) =>
+            res.status(404).json({ user: 'There is no user untill' })
+        );
+});
+// @route DELETE api/users/:user_id
+router.delete('/:id', (req, res, next) => {
+    console.log(req.params.id);
+    User.findByIdAndDelete(req.params.id)
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch((err) => res.status(404).json({ user: 'User not found' }));
+});
 module.exports = router;

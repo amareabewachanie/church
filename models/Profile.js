@@ -28,12 +28,24 @@ const profileSchema = new Schema({
         type: [String],
         required: true,
     },
-    social: [
-        {
-            name: { type: String, required: true },
-            link: { type: String, required: true },
+    bio: String,
+    social: {
+        youtube: {
+            type: String,
         },
-    ],
+        twitter: {
+            type: String,
+        },
+        facebook: {
+            type: String,
+        },
+        instagram: {
+            type: String,
+        },
+        linkedin: {
+            type: String,
+        },
+    },
     experience: [
         {
             title: {
@@ -44,7 +56,7 @@ const profileSchema = new Schema({
                 type: String,
                 required: true,
             },
-            location: String,
+            location: { type: String },
             from: {
                 type: Date,
                 required: true,
@@ -54,7 +66,7 @@ const profileSchema = new Schema({
                 type: Boolean,
                 default: false,
             },
-            description: String,
+            description: { type: String },
         },
     ],
     education: [
@@ -72,12 +84,12 @@ const profileSchema = new Schema({
                 type: Date,
                 required: true,
             },
-            to: Date,
+            to: { type: Date },
             current: {
                 type: Boolean,
                 default: false,
             },
-            description: String,
+            description: { type: String },
         },
     ],
     date: {

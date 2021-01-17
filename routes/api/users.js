@@ -38,17 +38,18 @@ router.post('/register', (req, res, next) => {
                 email: req.body.email,
                 password: req.body.password,
             });
-            bcrypt
-                .genSalt(10, (err, salt) => {
-                    bcrypt.hash(newUser.password, salt, (err, hash) => {
-                        if (err) throw err;
-                        newUser.password = hash;
-                        newUser.save().then((user) => {
-                            res.status(201).json({ user });
-                        });
-                    });
-                })
-                .catch((err) => console.log(err));
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    if (err) throw err;
+                    newUser.password = hash;
+                    newUser
+                        .save()
+                        .then((user) => {
+                            res.status(201).json(user);
+                        })
+                        .catch((err) => console.log(err));
+                });
+            });
         }
     });
 });
@@ -76,7 +77,11 @@ router.post('/login', (req, res, next) => {
             if (isMatch) {
                 // User matched
                 // create jwt payload
-                const payload = { id: user.id, email: user.email };
+                const payload = {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                };
 
                 // Sign token
                 jwt.sign(

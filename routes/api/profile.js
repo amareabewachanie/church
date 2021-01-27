@@ -127,12 +127,15 @@ router.post(
         if (req.body.location) profileFields.location = req.body.location;
         if (req.body.bio) profileFields.bio = req.body.bio;
         if (req.body.status) profileFields.status = req.body.status;
+        if (req.body.phone) profileFields.phone = req.body.phone;
         // Split skills
         if (typeof req.body.skills !== 'undefined') {
             profileFields.skills = req.body.skills.split(',');
         }
         //Hnadling social
         profileFields.social = {};
+        if (req.body.githubusername)
+            profileFields.social.githubusername = req.body.githubusername;
         if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
         if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
         if (req.body.facebook)

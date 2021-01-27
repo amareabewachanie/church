@@ -10,6 +10,10 @@ const profileSchema = new Schema({
         required: true,
         max: 40,
     },
+    phone: {
+        type: String,
+        required: true,
+    },
     company: {
         type: String,
     },
@@ -30,6 +34,9 @@ const profileSchema = new Schema({
     },
     bio: String,
     social: {
+        githubusername: {
+            type: String,
+        },
         youtube: {
             type: String,
         },

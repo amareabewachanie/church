@@ -7,6 +7,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 // import { InputText } from 'primereact/inputtext';
 // import { Divider } from 'primereact/divider';
 import { Link } from 'react-router-dom';
+import { Divider } from 'primereact/divider';
 
 class Login extends Component {
     constructor() {
@@ -51,7 +52,7 @@ class Login extends Component {
             <div className="login">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-8 m-auto">
+                        <div className="col-md-6 m-auto">
                             <h1 className="display-4 text-center">Login</h1>
                             <p className="lead text-center">
                                 Sign in to Your Account
@@ -73,6 +74,7 @@ class Login extends Component {
                                     onChange={this.onChange}
                                     error={errors.password}
                                 />
+
                                 <p className="text-warning">
                                     <Link to="/forgotpassword">
                                         Forgot Password?
@@ -82,11 +84,24 @@ class Login extends Component {
                                     type="submit"
                                     className="btn btn-info btn-block mt-4"
                                 />
-                                <p className="text-right">
-                                    Have no account?
-                                    <Link to="/register">Register now</Link>
-                                </p>
                             </form>
+                        </div>
+                        <div className="col-md-2">
+                            <Divider layout="vertical">
+                                <b>OR</b>
+                            </Divider>
+                        </div>
+                        <div className="col-md-4 my-auto">
+                            <Link
+                                to="/register"
+                                className="btn btn-lg btn-success"
+                            >
+                                <i
+                                    className="pi pi-user-plus"
+                                    style={{ fontSize: '2rem' }}
+                                ></i>{' '}
+                                Sign Up
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -7,9 +7,16 @@ module.exports = function validateProfileInput(data) {
     data.handle = !isEmpty(data.handle) ? data.handle : '';
     data.location = !isEmpty(data.location) ? data.location : '';
     data.status = !isEmpty(data.status) ? data.status : '';
+    data.phone = !isEmpty(data.phone) ? data.phone : '';
+    data.githubusername = !isEmpty(data.githubusername)
+        ? data.githubusername
+        : '';
     data.skills = !isEmpty(data.skills) ? data.skills : '';
     if (!Validator.isLength(data.handle, { min: 3, max: 40 })) {
         errors.handle = 'Handle must be between 3 and 40 characters';
+    }
+    if (isEmpty(data.phone)) {
+        errors.phone = 'Phone Number required';
     }
     if (isEmpty(data.location)) {
         errors.location = 'Location is required';
@@ -26,6 +33,11 @@ module.exports = function validateProfileInput(data) {
     if (!isEmpty(data.website)) {
         if (!Validator.isURL(data.website)) {
             errors.website = 'Please input a valid website';
+        }
+    }
+    if (!isEmpty(data.githubusername)) {
+        if (!Validator.isURL(data.githubusername)) {
+            errors.githubusername = 'Please input a valid github user name';
         }
     }
     if (!isEmpty(data.youtube)) {
